@@ -1,0 +1,94 @@
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * Delete the template below * * * * * * * * * -->
+<!-- * * * * * * * to get started with your project! * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<main class="main">
+  <div class="row">
+    <div class="col-4">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input type="text" id="name" class="form-control" formControlName="name">
+          <div *ngIf="form.get('name')?.invalid && form.get('name')?.touched" class="text-danger">
+            Name is required.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" id="email" class="form-control" formControlName="email">
+          <div *ngIf="form.get('email')?.invalid && form.get('email')?.touched" class="text-danger">
+            Please enter a valid email.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="major" class="form-label">Major</label>
+          <select name="major" id="major" class="form-control" formControlName="major" >
+            <option *ngFor="let major of majors" [value]="major.id">{{major.option}}</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" id="password" class="form-control" formControlName="password">
+          <div *ngIf="form.get('password')?.invalid && form.get('password')?.touched" class="text-danger">
+            Password must be at least 6 characters long.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="message" class="form-label">Message</label>
+          <textarea id="message" class="form-control" rows="3" formControlName="notes"></textarea>
+        </div>
+
+
+        <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Submit</button>
+        <button type="button" class="btn btn-primary" [hidden]="!isEditingMode">Undo</button>
+        <button type="button" class="btn btn-primary" [hidden]="!isEditingMode">ReDo</button>
+      </form>
+    </div>
+
+    <div class="col-8">
+      <table class="table">
+        <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Major</th>
+          <th scope="col">Notes</th>
+          <th scope="col">Options</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let user of users; let ind = index">
+          <th scope="row">{{user.id }}</th>
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ getMajor(user.major) }}</td>
+          <td>{{ user.notes }}</td>
+          <td><i class="bi bi-pencil" (click)="edit(user.id)"></i></td>
+
+        </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</main>
+
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content above * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+
+
+<router-outlet />
