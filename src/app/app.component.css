@@ -168,3 +168,7 @@ main {
 .bi{
   cursor: pointer;
 }
+
+.button-group button{
+  margin-right: 10px;
+}

@@ -4,5 +4,6 @@ interface User {
   email: string,
   password: string,
   notes?: string,
-  major: number
+  major: number,
+  gender : string
 }
